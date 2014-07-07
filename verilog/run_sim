@@ -1,0 +1,2 @@
+iverilog -o run.out *.v
+./run.out
