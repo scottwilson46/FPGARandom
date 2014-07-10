@@ -24,12 +24,21 @@ prbs i_rand (
     .prbs_out    (rand_31),
     .valid_out   (rand_valid));
 `else
+`ifdef TAUSWORTHE
+tausworth i_tausworth (
+    .clk               (clk),
+    .reset             (rst),
+    .random_out        (rand_32),
+    .valid_out         (rand_valid));
+assign rand_31 = rand_32[30:0];
+`else
 mercenne_twister i_mercenne (
     .clk               (clk),
     .reset             (rst),
     .rand_out          (rand_32),
     .rand_out_valid    (rand_valid));
 assign rand_31 = rand_32[30:0];
+`endif
 `endif
 
 coord_pl #(.IP_BIT_WIDTH(31)) i_coord (

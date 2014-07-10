@@ -1,0 +1,2 @@
+iverilog -D TAUSWORTHE -o run.out *.v tausworthe/*.v common/*.v
+./run.out
