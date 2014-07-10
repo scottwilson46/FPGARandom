@@ -1,2 +1,2 @@
-iverilog -o run.out *.v
-./run.out
+iverilog -D PRBS_RAND -o run.out *.v prbs/*.v
+./run.out 

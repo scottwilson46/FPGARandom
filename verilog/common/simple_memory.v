@@ -16,7 +16,6 @@ module simple_memory #(parameter DATA_SIZE = 8, ADDR_SIZE = 8)
     begin 
       if (wr_en == 1'b1) begin
         ram[wr_addr] <= wr_data;
-        if (wr_addr == 'd1) $display("%t, data = %x", $time, wr_data);
       end
     end
 

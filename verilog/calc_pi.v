@@ -8,6 +8,7 @@ module calc_pi (
 );
 
 wire [30:0] rand_31;
+wire [31:0] rand_32;
 wire        rand_valid;
 wire        op_lt_1_p2;
 wire        coord_valid_p2;
@@ -16,13 +17,22 @@ reg  [26:0] op_count;
 reg  [26:0] lt_count;
 wire [26:0] divide_out;
 
+`ifdef PRBS_RAND
 prbs i_rand (
     .clk         (clk),
     .rst         (rst),
     .prbs_out    (rand_31),
     .valid_out   (rand_valid));
+`else
+mercenne_twister i_mercenne (
+    .clk               (clk),
+    .reset             (rst),
+    .rand_out          (rand_32),
+    .rand_out_valid    (rand_valid));
+assign rand_31 = rand_32[30:0];
+`endif
 
-coord #(.IP_BIT_WIDTH(31)) i_coord (
+coord_pl #(.IP_BIT_WIDTH(31)) i_coord (
     .clk               (clk),
     .rst               (rst),
     .rand_num          (rand_31),

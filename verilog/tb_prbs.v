@@ -22,7 +22,7 @@ initial
 begin
 	$dumpfile("new.vcd");
 	$dumpvars();
-	#100000 
+	#10000000
         
         $display("pi = %f", pi_real);
         $finish();
